@@ -1,0 +1,110 @@
+<nav class="navbar navbar-expand-md header dark-bg ">
+  <div class="container-fluid">
+    <div class="navbar-brand">
+      <a href="/">
+        <img src="/img/logo.png" style="height: 10%;width:10% ;margin-right: 10px ">
+      </a>
+
+      <a href="/" id="brand" style="margin-right: 10px">Inter<span class="lite" style="margin-left: 2px">Jobs</span></a>
+
+      <a href="/search">
+        <span class="primary-bg"> Search Page </span>
+      </a>
+
+    </div>
+    <ul class="navbar-nav pull-right navbar-ml top-menu">
+
+      <% if(logged) { %>
+
+
+      <li id="mail_notificatoin_bar" class="dropdown">
+
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#" style=" color: #bdbdbd; font-size: 15pt">
+          Notification
+          <span class="badge badge-light">1</span>
+        </a>
+
+        <ul class="dropdown-menu extended tasks-bar">
+          <div class="notify-arrow notify-arrow-blue"></div>
+
+          <li>
+            <p class="light-bg" style="padding: 10pt ; background-color: #688a7e ; color: blanchedalmond">You have 5 new
+              Notification</p>
+          </li>
+          <li>
+            <a href="#">
+              <span class="photo"><img alt="avatar" src="./img/avatar-mini.jpg"></span>
+              <span class="message">
+                I really like this admin panel.
+              </span>
+            </a>
+          </li>
+        </ul>
+
+      </li>
+
+      <li id="mail_notificatoin_bar" class="dropdown">
+
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="color: #bdbdbd ; font-size: 15pt">
+          Mail
+          <span class="badge badge-light">1</span>
+        </a>
+
+        <ul class="dropdown-menu extended tasks-bar">
+          <li>
+            <p class="light-bg" style="padding: 10pt ; background-color: #688a7e ; color: blanchedalmond">You have 5 new
+              messages</p>
+          </li>
+          <li>
+            <a href="#">
+              <span class="photo"><img alt="avatar" src="./img/avatar-mini.jpg"></span>
+              <span class="subject">
+                <span class="from">Greg Martin</span>
+              </span>
+              <span class="message">
+                I really like this admin panel.
+              </span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="dropdown">
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+          <span class="profile-ava">
+            <% if(logged.img) { %>
+            <img style="height: 30pt" alt="profile" src=<%= logged.img %>>
+            <% }else{ %>
+            <img style="height: 30pt" alt="profile" src="./img/avatar-1">
+            <%}%>
+          </span>
+          <span id="username"><%= logged.name %></span>
+          <b class="caret"></b>
+        </a>
+
+        <ul class="dropdown-menu extended logout">
+          <div class="log-arrow-up"></div>
+
+          <li class="eborder-top">
+            <a href="/profile"><i class="icon_profile"></i> My Profile</a>
+          </li>
+          <li>
+            <a href="/user/logout"><i class="icon_key_alt"></i> Logout </a>
+          </li>
+        </ul>
+      </li>
+
+      <% }else{ %>
+
+      <li class="nav-item">
+        <a class="btn btn-primary" href="/login" style="margin-right: 20pt">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-success" href="/switch">Join Us Now</a>
+      </li>
+
+      <%}%>
+    
+    </ul>
+  </div>
+</nav>

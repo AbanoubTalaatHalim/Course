@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include('includes/head.ejs') %>
+
+    <title>SignUp Page</title>
+
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet"
+        id="bootstrap-css">
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/css/font-awesome.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet">
+
+    <link href="/css/style-responsive.css" rel="stylesheet" />
+    <link href="/css/signup.css" rel="stylesheet" />
+
+</head>
+
+<body class="login-img3-body">
+
+    <div class="container">
+
+        <form class="login-form signup-form" action="/user/signup" method="post" enctype="multipart/form-data">
+            <div class="login-wrap">
+
+                <%- include('includes/signupCommon.ejs')%>
+
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <input type="radio" id="Male" value="Male" name="Gender"><label for="Male" class="light">Male
+                    </label><br>
+                    <input type="radio" id="Female" value="Female" name="Gender"><label for="Female"
+                        class="light">Female</label>
+                </div>
+
+                <%- include('includes/address_html.ejs')%>
+
+                <div class="form-group">
+                    <label>Skills </label>
+                    <dl class="dropdown">
+                        <dt>
+                            <a>
+                                <span class="hida">Select</span>
+                                <p class="multiSel"></p>
+                            </a>
+                        </dt>
+                        <dd>
+                            <div class="mutliSelect">
+                                <ul>
+                                    <% for(i=1 ; i< data.length ; i++ ) { %>
+                                    <% var skill = data[i] ;  %>
+                                    <li>
+                                        <input name="skills" type="checkbox" value=<%= skill %> /> <%= skill %></li>
+                                    <% } %>
+                                </ul>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+
+
+                <label for="job">Job Role:</label>
+                <select id="job" name="user_job">
+                    <optgroup label="Web">
+                        <option value="frontend_developer">Front-End Developer</option>
+                        <option value="php_developor">PHP Developer</option>
+                        <option value="python_developer">Python Developer</option>
+                        <option value="rails_developer"> Rails Developer</option>
+                        <option value="web_designer">Web Designer</option>
+                        <option value="WordPress_developer">WordPress Developer</option>
+                    </optgroup>
+                    <optgroup label="Mobile">
+                        <option value="Android_developer">Androild Developer</option>
+                        <option value="iOS_developer">iOS Developer</option>
+                        <option value="mobile_designer">Mobile Designer</option>
+                    </optgroup>
+                    <optgroup label="Business">
+                        <option value="business_owner">Business Owner</option>
+                        <option value="freelancer">Freelancer</option>
+                    </optgroup>
+                    <optgroup label="Other">
+                        <option value="secretary">Secretary</option>
+                        <option value="maintenance">Maintenance</option>
+                    </optgroup>
+                </select>
+
+                <div class="form-group">
+                    <label>Years of Experience
+                    </label>
+                    <input name="experience" id="experience" type="number" class="form-control"
+                        placeholder="Number For Years of Experience" autofocus required>
+                </div>
+
+                <div class="form-group">
+                    <label>Describe yourself
+                    </label>
+                    <textarea name="description" id="description" type="text" class="md-textarea form-control" rows="5"
+                        placeholder="Your Description" autofocus> </textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="custom-file-label" for="validatedCustomFile">Upload Your CV</label>
+                    <input name="cv" type="file" accept=".doc , .pdf" class="custom-file-input" id="validatedCustomFile"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Your Profile Picture</label>
+                    <input name="pic" id="pic" type="file" accept="image/*" class="form-control-file" required>
+                </div>
+
+                <% if(err) { %>
+                <label class="alert alert-danger">
+                    <%= err %></label>
+                <% } %>
+
+                <button class="btn btn-info btn-lg btn-block" type="submit">Signup</button>
+
+            </div>
+        </form>
+
+    </div>
+
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script>
+
+        $(".dropdown dt a").on('click', function () {
+            $(".dropdown dd ul").slideToggle('fast');
+        });
+
+        $(".dropdown dd ul li a").on('click', function () {
+            $(".dropdown dd ul").hide();
+        });
+
+        function getSelectedValue(id) {
+            return $("#" + id).find("dt a span.value").html();
+        }
+
+        $(document).bind('click', function (e) {
+            var $clicked = $(e.target);
+            if (!$clicked.parents().hasClass("dropdown")) $(".dropdown dd ul").hide();
+        });
+
+        $('.mutliSelect input[type="checkbox"]').on('click', function () {
+            var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
+                title = $(this).val() + ",";
+
+            if ($(this).is(':checked')) {
+                var html = '<span title="' + title + '">' + title + '</span>';
+                $('.multiSel').append(html);
+                $(".hida").hide();
+            } else {
+                $('span[title="' + title + '"]').remove();
+                var ret = $(".hida");
+                $('.dropdown dt a').append(ret);
+            }
+        });
+    </script>
+</body>
+
+</html>
